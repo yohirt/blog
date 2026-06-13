@@ -1,6 +1,6 @@
 // Get site URL from environment variable, use default value if not set
 // Note: Please set the correct PUBLIC_SITE_URL in .env file after first deployment
-const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://portfolio.ricoui.com/';
+const SITE_URL = import.meta.env.PUBLIC_SITE_URL || 'https://example.com/';
 
 export const siteConfig = {
 	title: "eRTe Portfolio",
@@ -15,11 +15,11 @@ export const siteConfig = {
 		campaign: "navigation",
 	},
 	meta:{
-		title: "Rafał Taraszka - Programmer, musician, artist", 
-		description: "I'm Rico, a web designer passionate about both design and code. Currently developing a personal product for the design community.",
-		keywords: "Rafał Taraszka - Programmer, musician, artist",
+		title: "Rafał Taraszka - nauczyciel, programista, muzyk",
+		description: "Cześć, jestem Rafał Taraszka. Uczę, programuję, gram na perkusji, komponuję i prowadzę własne akwaria.",
+		keywords: "Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwarysta",
 		image: `${SITE_URL}/og.jpg`,
-		twitterHandle: "ricouii",
+		twitterHandle: "",
 	},
 	// social links
 	social:{
