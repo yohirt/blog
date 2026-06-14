@@ -108,6 +108,10 @@
         "/assets/stack/koduje.png",
       ];
 
+      const iconScaleOverrides = new Map<string, number>([
+        ["/assets/stack/koduje.png", 1.5],
+      ]);
+
       // Preload images to obtain naturalWidth/Height
       function loadImage(url: string) {
         return new Promise<HTMLImageElement>((resolve, reject) => {
@@ -145,7 +149,7 @@
         body: Matter.Body;
         el: HTMLDivElement;
 
-        constructor(img: HTMLImageElement) {
+        constructor(img: HTMLImageElement, scaleMultiplier = 1) {
           const x = Math.random() * W;
           const y = Math.random() * -H;
 
@@ -163,6 +167,9 @@
           // Global scale up or down
           w *= scaleFactor;
           h *= scaleFactor;
+
+          w *= scaleMultiplier;
+          h *= scaleMultiplier;
 
           this.w = w;
           this.h = h;
@@ -207,7 +214,9 @@
       const total = Math.min(iconsImgs.length, count);
       const iconsBodies: IconBody[] = [];
       for (let i = 0; i < total; i++) {
-        iconsBodies.push(new IconBody(iconsImgs[i]));
+        const iconUrl = iconUrls[i];
+        const scaleMultiplier = iconScaleOverrides.get(iconUrl) ?? 1;
+        iconsBodies.push(new IconBody(iconsImgs[i], scaleMultiplier));
       }
       Matter.World.add(
         world,
