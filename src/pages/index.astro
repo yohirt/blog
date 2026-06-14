@@ -11,22 +11,26 @@ import Explore from "@/components/sections/Explore.astro";
 ---
 
 <Layout
-title="Rafał Taraszka"
-description="Cześć, jestem Rafał. Uczę, programuję i tworzę rytmy: w kodzie, muzyce i codziennych systemach."
-keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwarystyka, blog"
+  title="Rafał Taraszka"
+  description="Cześć, jestem Rafał. Uczę, programuję i tworzę rytmy: w kodzie, muzyce i codziennych systemach."
+  keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwarystyka, blog"
 >
   <div
-    class="relative site-container z-20  w-full mx-auto mt-16 px-4 md:mt-18 lg:mt-20 xl:px-0"
+    class="relative site-container z-20 w-full mx-auto mt-16 px-4 md:mt-18 lg:mt-20 xl:px-0"
   >
-    <div class="relative w-full px-4 flex flex-col items-center justify-between md:flex-row mb-16 ">
-      <div class="relative w-full md:max-w-[420px] md:w-1/2 text-center sm:text-left sm:-mt-8">
+    <div
+      class="relative w-full px-4 flex flex-col items-center justify-between md:flex-row mb-16"
+    >
+      <div
+        class="relative w-full md:max-w-[420px] md:w-1/2 text-center sm:text-left sm:-mt-8"
+      >
         <h1 class="mb-4">
           <AnimatedText
             content="Cześć, jestem Rafał"
             delay={0.1}
             duration={0.5}
             stagger={0.08}
-            class="text-5xl text-pri leading-tight md:text-4xl lg:text-6xl font-brand "
+            class="text-5xl text-pri leading-tight md:text-4xl lg:text-6xl font-brand"
           />
         </h1>
 
@@ -57,7 +61,11 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
           data-aos-duration="500"
           data-aos-once="true"
         >
-          <Button url={`mailto:${siteConfig.mail}`} type="fill" className="m-auto mt-4 text-center sm:text-left sm:m-0 sm:mt-6 max-w-[200px]">
+          <Button
+            url={`mailto:${siteConfig.mail}`}
+            type="fill"
+            className="m-auto mt-4 text-center sm:text-left sm:m-0 sm:mt-6 max-w-[200px]"
+          >
             Napisz do mnie
           </Button>
         </div>
@@ -69,7 +77,7 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
           data-aos-duration="600"
           data-aos-once="true"
         >
-          <SocialCard displaySocialIds={[8]}/>
+          <SocialCard displaySocialIds={[8]} />
         </div>
       </div>
 
@@ -81,7 +89,7 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
         data-aos-once="true"
       >
         <HeroCard
-          imageUrl="/assets/home/gradientshub.jpg"
+          imageUrl="/assets/home/ertehub.png"
           title="Rafał Taraszka"
           link="/about"
         />
@@ -96,7 +104,7 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
     data-aos-duration="600"
     data-aos-once="true"
   >
-    <Explore title="Odkrywaj ↓"  />
+    <Explore title="Odkrywaj ↓" />
   </section>
 
   <section
@@ -106,7 +114,11 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
     data-aos-duration="600"
     data-aos-once="true"
   >
-    <FeaturedWork title="Wybrane projekty ↓" description="Miejsce na rzeczy, które łączą programowanie, edukację, muzykę i osobiste eksperymenty." limit={5} />
+    <FeaturedWork
+      title="Wybrane projekty ↓"
+      description="Miejsce na rzeczy, które łączą programowanie, edukację, muzykę i osobiste eksperymenty."
+      limit={5}
+    />
   </section>
 
   <section
@@ -122,5 +134,4 @@ keywords="Rafał Taraszka, nauczyciel, programista, perkusista, kompozytor, akwa
       showViewAllButton={true}
     />
   </section>
-
 </Layout>
