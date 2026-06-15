@@ -1,16 +1,225 @@
 ---
-import WorksSection from "@/components/sections/WorksSection.astro";
+import Button from "@/components/ui/Button.astro";
+import works from "@/collections/works.json";
 import PageLayout from "@/layouts/PageLayout.astro";
-import PageHeader from "@/components/elements/PageHeader.astro";
+import {
+  ArrowUpRight,
+  Binary,
+  BookOpenCheck,
+  CircleCheckBig,
+  CodeXml,
+  Rocket,
+  ShieldCheck,
+  Sparkles,
+} from "@lucide/astro";
+
+const missionStats = [
+  { value: "01", label: "misje krok po kroku" },
+  { value: "02", label: "poziomy do zdobycia" },
+  { value: "03", label: "praktyczne projekty" },
+];
+
+const pillars = [
+  {
+    title: "Start w kokpicie",
+    description:
+      "Początkujący dostają spokojne wejście w podstawy technologii, bez zbędnego komplikowania.",
+    icon: Rocket,
+  },
+  {
+    title: "Kampanie z kodem",
+    description:
+      "Python, React i Node.js pojawiają się jako kolejne wyzwania, ćwiczenia i małe zadania projektowe.",
+    icon: CodeXml,
+  },
+  {
+    title: "Postęp gracza",
+    description:
+      "Nauka ma przypominać zdobywanie poziomów w statku kosmicznym: misja po misji, z widocznym rozwojem.",
+    icon: ShieldCheck,
+  },
+];
 ---
 
-<PageLayout title="My Works">
-  <section class="site-container m-auto">
-    <PageHeader
-      title="Works"
-      description="Here are some of my recent projects. I'm always working on something new, so check back often!"
-    />
+<PageLayout
+  title="Projekty Koduje.edu.pl"
+  description="Koduje.edu.pl to edukacyjny projekt o nauce programowania w klimacie kosmicznych misji, poziomów i praktycznych wyzwań."
+>
+  <section class="relative isolate overflow-hidden bg-[#02030a] text-white">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(255,194,0,0.12),transparent_28%),radial-gradient(circle_at_78%_28%,rgba(45,109,195,0.14),transparent_32%),linear-gradient(180deg,#050711_0%,#02030a_68%,#080403_100%)]"></div>
+    <div class="absolute inset-0 -z-10 opacity-45 [background-image:radial-gradient(circle,rgba(255,229,157,0.9)_1px,transparent_1.4px)] [background-size:72px_72px]"></div>
+    <div class="absolute left-0 right-0 top-0 h-px bg-orange-500/50"></div>
 
-    <WorksSection />
+    <div class="site-container mx-auto py-12 md:py-16">
+      <div class="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="relative border-l-4 border-orange-500 bg-[#171925]/95 px-6 py-7 shadow-[0_0_48px_rgba(255,91,32,0.18)] md:px-9 md:py-10 clip-mission">
+          <div class="mb-4 inline-flex items-center gap-2 border border-yellow-400/45 bg-yellow-400/10 px-3 py-1 text-xs font-black uppercase tracking-[0.22em] text-yellow-300">
+            <Sparkles size={14} />
+            Platforma treningowa
+          </div>
+
+          <h1 class="max-w-3xl font-brand text-4xl font-black uppercase leading-[1.05] tracking-normal text-white md:text-6xl">
+            Koduje.edu.pl to misja nauki programowania
+          </h1>
+
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            To projekt edukacyjny pokazujący, że programowanie może być ciekawe, dostępne i praktyczne. Strona jest zbudowana jak pokład statku kosmicznego: wybierasz ścieżkę, wykonujesz zadania, zdobywasz poziomy i krok po kroku oswajasz świat kodu.
+          </p>
+
+          <div class="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Button url="#misje" type="fill" className="!max-w-none !rounded-none !border !border-orange-500 !bg-[#ff4f1f] !px-6 !uppercase !tracking-[0.18em] hover:!bg-[#ff6b2c]">
+              Zobacz misje
+              <ArrowUpRight size={16} />
+            </Button>
+            <Button url="https://koduje.edu.pl/" target="_blank" type="solid" className="!max-w-none !rounded-none !border-orange-500/50 !bg-[#11131d] !px-6 !uppercase !tracking-[0.18em]">
+              Otwórz EDU-QUEST
+              <Rocket size={16} />
+            </Button>
+          </div>
+
+          <div class="mt-8 grid gap-3 sm:grid-cols-3">
+            {missionStats.map((item) => (
+              <div class="border border-slate-700/80 bg-black/25 p-4">
+                <div class="font-brand text-2xl text-yellow-300">{item.value}</div>
+                <div class="mt-1 text-xs font-bold uppercase tracking-[0.14em] text-slate-400">{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -inset-2 border border-orange-500/30 bg-orange-500/5 blur-xl"></div>
+          <img
+            src="/assets/projects/koduje-space-quest-hero.png"
+            alt="Kosmiczny panel misji do nauki programowania"
+            class="relative aspect-video w-full border border-orange-500/45 object-cover shadow-[0_0_60px_rgba(255,91,32,0.2)] clip-mission"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#050711] py-12 text-white md:py-16">
+    <div class="site-container mx-auto">
+      <div class="mb-7 flex items-end justify-between gap-6">
+        <div>
+          <div class="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-orange-400">
+            <Binary size={16} />
+            Czym jest koduje.edu.pl?
+          </div>
+          <h2 class="font-brand text-3xl font-black uppercase leading-tight md:text-5xl">
+            Nauka przez praktykę, zadania i poziomy
+          </h2>
+        </div>
+      </div>
+
+      <div class="grid gap-4 lg:grid-cols-3">
+        {pillars.map((pillar) => {
+          const Icon = pillar.icon;
+          return (
+            <article class="border border-slate-700/80 bg-[#171925] p-6 clip-panel">
+              <div class="mb-5 flex h-12 w-12 items-center justify-center border border-orange-500/60 bg-orange-500/10 text-orange-400">
+                <Icon size={24} />
+              </div>
+              <h3 class="font-brand text-2xl font-black uppercase text-white">{pillar.title}</h3>
+              <p class="mt-3 leading-7 text-slate-400">{pillar.description}</p>
+            </article>
+          );
+        })}
+      </div>
+
+      <div class="mt-8 border border-yellow-400/25 bg-yellow-400/10 p-6 text-slate-200 clip-panel md:p-8">
+        <p class="max-w-5xl text-base leading-8 md:text-lg">
+          Koduje.edu.pl powstało z potrzeby dzielenia się wiedzą i budowania miejsca, w którym nauka technologii jest bardziej przyjazna. To przestrzeń do eksperymentowania, rozwijania logicznego myślenia i tworzenia własnych cyfrowych rozwiązań. W skrócie: uczysz się kodowania tak, jakbyś był na statku kosmicznym i odblokowywał kolejne poziomy swojej przygody.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="misje" class="bg-[#02030a] py-12 text-white md:py-16">
+    <div class="site-container mx-auto">
+      <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div>
+          <div class="mb-3 inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.22em] text-yellow-300">
+            <BookOpenCheck size={16} />
+            Ścieżki nauki
+          </div>
+          <h2 class="font-brand text-3xl font-black uppercase leading-tight md:text-5xl">
+            Projekty jako kampanie
+          </h2>
+        </div>
+        <p class="max-w-xl leading-7 text-slate-400">
+          Każda karta działa jak moduł treningowy: konkretny temat, praktyczny cel i następny krok do wykonania.
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {works.map((project, index) => {
+          const isExternal = project.url.startsWith("http");
+          return (
+            <article class="group relative overflow-hidden border border-slate-700/80 bg-[#171925] p-5 transition duration-300 hover:-translate-y-1 hover:border-orange-500/80 hover:shadow-[0_18px_42px_rgba(255,91,32,0.12)] clip-panel">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <span class="border border-orange-500/60 bg-orange-500/10 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-orange-400">
+                  Misja {String(index + 1).padStart(2, "0")}
+                </span>
+                <CircleCheckBig class="text-yellow-300" size={18} />
+              </div>
+
+              <div class="relative aspect-video overflow-hidden border border-slate-700/80 bg-black">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-[#02030a]/75 via-transparent to-transparent"></div>
+              </div>
+
+              <div class="pt-5">
+                <h3 class="font-brand text-2xl font-black uppercase leading-tight text-white">
+                  {project.name}
+                </h3>
+                <p class="mt-3 min-h-[5.25rem] leading-7 text-slate-400">
+                  {project.description}
+                </p>
+
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {project.tags?.map((tag) => (
+                    <span class="border border-yellow-400/30 bg-yellow-400/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-yellow-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-orange-400">
+                  Rozpocznij kampanię
+                  <ArrowUpRight size={16} />
+                </div>
+              </div>
+
+              <a
+                href={project.url}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                class="absolute inset-0 z-10"
+              >
+                <span class="sr-only">Otwórz projekt {project.name}</span>
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
   </section>
 </PageLayout>
+
+<style>
+  .clip-mission {
+    clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  }
+
+  .clip-panel {
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  }
+</style>

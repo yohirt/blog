@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "name": "EDU-QUEST",
+    "description": "Kosmiczna platforma nauki programowania: wybierasz misje, ćwiczysz praktycznie i zdobywasz kolejne poziomy.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/sciezki",
+    "tags": ["Koduje", "Misje", "Poziomy"],
+    "isShow": true
+  },
+  {
+    "name": "Python: zmienne",
+    "description": "Misja startowa o podstawach języka, danych i prostych operacjach, zrobiona jak pierwszy poziom kampanii.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/wyzwania/python-zmienne",
+    "tags": ["Python", "Podstawy", "Start"],
+    "isShow": true
+  },
+  {
+    "name": "React: useState",
+    "description": "Krótka kampania o stanie komponentu, interaktywnym UI i pierwszych praktycznych ćwiczeniach w React.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/wyzwania/react-usestate",
+    "tags": ["React", "Frontend", "UI"],
+    "isShow": true
+  }
+]

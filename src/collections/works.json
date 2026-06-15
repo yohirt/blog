@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "name": "EDU-QUEST",
+    "description": "Główna platforma koduje.edu.pl: kosmiczny kokpit nauki, w którym wybierasz misje, rozwiązujesz zadania i zdobywasz kolejne poziomy programowania.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/sciezki",
+    "tags": ["Koduje", "Misje", "Poziomy"],
+    "isShow": true
+  },
+  {
+    "name": "Python: zmienne",
+    "description": "Pierwsza kampania od prostych danych, nazw i operacji. Dobra misja startowa dla osób, które dopiero wchodzą na pokład.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/wyzwania/python-zmienne",
+    "tags": ["Python", "Podstawy", "Start"],
+    "isShow": true
+  },
+  {
+    "name": "React: useState",
+    "description": "Frontendowa misja o stanie komponentu, aktualizacji interfejsu i budowaniu pierwszych interaktywnych ekranów.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/wyzwania/react-usestate",
+    "tags": ["React", "Frontend", "UI"],
+    "isShow": true
+  },
+  {
+    "name": "Node: middleware",
+    "description": "Kampania backendowa o przepływie requestu, kolejności funkcji i praktycznym myśleniu o aplikacjach serwerowych.",
+    "image": "/assets/projects/koduje-space-quest-hero.png",
+    "url": "https://koduje.edu.pl/wyzwania/node-middleware",
+    "tags": ["Node.js", "Backend", "API"],
+    "isShow": true
+  }
+]
