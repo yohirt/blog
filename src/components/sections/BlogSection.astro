@@ -20,7 +20,9 @@ const {
 } = Astro.props;
 
 // 获取博客文章集合
-const allPosts = await getCollection("post");
+const allPosts = (await getCollection("post")).filter(
+  (post) => post.data.hidden !== true
+);
 
 // 按发布日期排序文章
 let posts = allPosts.sort(

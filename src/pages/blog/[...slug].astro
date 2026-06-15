@@ -6,7 +6,9 @@ import Toc from '@/components/widgets/Toc.astro';
 // 根据 Astro v5/v6，对于 SSG 模式下的动态路由，需要使用 getStaticPaths()
 // 来告诉 Astro 在构建时生成哪些页面
 export async function getStaticPaths() {
-	const postEntries = await getCollection("post");
+	const postEntries = (await getCollection("post")).filter(
+		(entry) => entry.data.hidden !== true
+	);
 	return postEntries.map((entry) => {
 		// 根据 Astro v5 官方文档，entry.id 就是条目的唯一标识符
 		// 对于 [...slug] 路由，需要将 entry.id 转换为 slug 数组
