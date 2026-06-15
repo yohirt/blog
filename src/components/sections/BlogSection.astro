@@ -32,7 +32,7 @@ const featuredPost = posts.find((post) => post.data.featured);
 
 // 如果存在特色文章，从主列表中移除
 if (featuredPost && listPage) {
-  posts = posts.filter((post) => post.data.featured !== true);
+  posts = posts.filter((post) => post.id !== featuredPost.id);
 }
 
 // 计算总页数
