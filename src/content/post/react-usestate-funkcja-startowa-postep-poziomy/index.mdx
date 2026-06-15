@@ -1,0 +1,266 @@
+---
+title: "Jak działa useState z funkcją startową w React?"
+publishDate: 2026-06-16
+read: 7
+description: "Wyjaśnienie leniwej inicjalizacji useState, postępu gracza, currentLevel oraz zabezpieczenia indeksu przez Math.min i Math.max."
+tags:
+  - React
+  - useState
+  - stan aplikacji
+img: "/assets/blog/react-usestate-funkcja-startowa-postep-poziomy.png"
+img_alt: "Infografika wyjaśniająca useState z funkcją startową w React"
+featured: true
+---
+
+Ten fragment kodu zarządza postępem gracza w aplikacji: przechowuje odblokowane poziomy, wyniki i aktualnie wybrany poziom. Najważniejsze jest to, że drugi stan zabezpiecza aplikację przed wybraniem poziomu, którego już nie ma na liście zadań.
+
+```js
+const [{ unlockedLevel, levelResults }, setProgress] = useState(() => ({
+  unlockedLevel: initialProgress.unlockedLevel,
+  levelResults: initialProgress.levelResults,
+}));
+
+const [currentLevel, setCurrentLevel] = useState(() => (
+  Math.min(initialProgress.currentLevel, Math.max(tasks.length - 1, 0))
+));
+```
+
+<div className="lesson-note">
+  Najkrócej: pierwszy <code>useState</code> przechowuje postęp, drugi <code>useState</code> przechowuje aktualny poziom, a <code>Math.min</code> i <code>Math.max</code> pilnują poprawnego zakresu indeksu.
+</div>
+
+![Infografika pokazująca działanie useState z funkcją startową](/assets/blog/react-usestate-funkcja-startowa-postep-poziomy.png)
+
+## Co robi ten kod?
+
+Kod składa się z dwóch stanów:
+
+| Stan | Co przechowuje? |
+| --- | --- |
+| `unlockedLevel` i `levelResults` | postęp gracza oraz wyniki z poziomów |
+| `currentLevel` | indeks aktualnie wybranego poziomu |
+
+Oba stany korzystają z funkcji przekazanej do `useState`, czyli z tak zwanej leniwej inicjalizacji.
+
+```js
+useState(() => {
+  return wartośćPoczątkowa;
+});
+```
+
+Taka funkcja wykona się tylko przy pierwszym renderowaniu komponentu. React nie będzie przeliczał tej wartości przy każdym kolejnym renderze.
+
+## Pierwszy stan: postęp gracza
+
+Pierwszy fragment wygląda tak:
+
+```js
+const [{ unlockedLevel, levelResults }, setProgress] = useState(() => ({
+  unlockedLevel: initialProgress.unlockedLevel,
+  levelResults: initialProgress.levelResults,
+}));
+```
+
+Ten stan przechowuje dwie informacje:
+
+| Element | Znaczenie |
+| --- | --- |
+| `unlockedLevel` | poziom, który jest odblokowany dla gracza |
+| `levelResults` | wyniki zapisane dla poszczególnych poziomów |
+| `setProgress` | funkcja do aktualizacji postępu |
+
+Najciekawszy jest zapis po lewej stronie:
+
+```js
+const [{ unlockedLevel, levelResults }, setProgress] = useState(...);
+```
+
+To połączenie `useState` i destrukturyzacji obiektu. Dzięki temu z obiektu stanu od razu wyciągamy `unlockedLevel` i `levelResults`.
+
+Zamiast pisać:
+
+```js
+progress.unlockedLevel;
+progress.levelResults;
+```
+
+możemy pisać krócej:
+
+```js
+unlockedLevel;
+levelResults;
+```
+
+## Funkcja startowa w useState
+
+W obu fragmentach do `useState` trafia funkcja:
+
+```js
+useState(() => ({
+  unlockedLevel: initialProgress.unlockedLevel,
+  levelResults: initialProgress.levelResults,
+}));
+```
+
+Nie przekazujemy od razu gotowego obiektu, tylko funkcję, która ten obiekt zwraca. To jest przydatne, gdy wartość początkowa wymaga przygotowania danych albo obliczeń.
+
+<div className="student-box">
+  Możesz myśleć o tym tak: React pyta o wartość początkową tylko na starcie komponentu. Potem stan już żyje własnym życiem i zmienia się przez funkcje aktualizujące.
+</div>
+
+## Drugi stan: aktualny poziom
+
+Drugi fragment ustawia aktualnie wybrany poziom:
+
+```js
+const [currentLevel, setCurrentLevel] = useState(() => (
+  Math.min(initialProgress.currentLevel, Math.max(tasks.length - 1, 0))
+));
+```
+
+Tutaj mamy klasyczną parę z `useState`:
+
+| Element | Znaczenie |
+| --- | --- |
+| `currentLevel` | indeks aktualnie wybranego poziomu |
+| `setCurrentLevel` | funkcja do zmiany aktualnego poziomu |
+
+Najważniejszy jest jednak ten zapis:
+
+```js
+Math.min(initialProgress.currentLevel, Math.max(tasks.length - 1, 0));
+```
+
+On zabezpiecza `currentLevel`, żeby nie wskazywał poziomu spoza listy `tasks`.
+
+## Po co są Math.min i Math.max?
+
+Najpierw spójrzmy na wewnętrzną część:
+
+```js
+Math.max(tasks.length - 1, 0);
+```
+
+`tasks.length - 1` daje ostatni poprawny indeks tablicy. Jeśli tablica ma 3 elementy, ostatni indeks to `2`, bo indeksy zaczynają się od zera.
+
+`Math.max(..., 0)` pilnuje, żeby wynik nigdy nie spadł poniżej `0`. To ważne, gdy lista zadań jest pusta.
+
+Potem zewnętrzna część:
+
+```js
+Math.min(initialProgress.currentLevel, ostatniPoprawnyIndeks);
+```
+
+`Math.min` wybiera mniejszą wartość. Dzięki temu, jeśli zapisany wcześniej poziom jest za wysoki, aplikacja cofnie go do ostatniego istniejącego poziomu.
+
+## Przykład krok po kroku
+
+Załóżmy, że mamy trzy zadania:
+
+```js
+const tasks = ["zadanie 1", "zadanie 2", "zadanie 3"];
+```
+
+Indeksy wyglądają tak:
+
+| Zadanie | Indeks |
+| --- | --- |
+| `zadanie 1` | `0` |
+| `zadanie 2` | `1` |
+| `zadanie 3` | `2` |
+
+Ostatni poprawny indeks:
+
+```js
+Math.max(tasks.length - 1, 0);
+// Math.max(3 - 1, 0)
+// 2
+```
+
+Jeśli w zapisanym postępie mamy:
+
+```js
+initialProgress.currentLevel = 7;
+```
+
+to końcowy poziom zostanie ograniczony:
+
+```js
+Math.min(7, 2);
+// 2
+```
+
+Użytkownik trafi więc na poziom `2`, czyli ostatni dostępny poziom.
+
+<div className="flow-card">
+  <div className="flow-step">
+    <span>1</span>
+    <p>Aplikacja ma 3 zadania, więc poprawne indeksy to <code>0</code>, <code>1</code> i <code>2</code>.</p>
+  </div>
+  <div className="flow-step">
+    <span>2</span>
+    <p><code>Math.max(tasks.length - 1, 0)</code> wylicza ostatni bezpieczny indeks: <code>2</code>.</p>
+  </div>
+  <div className="flow-step">
+    <span>3</span>
+    <p>Zapisany poziom to <code>7</code>, czyli więcej niż aplikacja może pokazać.</p>
+  </div>
+  <div className="flow-step">
+    <span>4</span>
+    <p><code>Math.min(7, 2)</code> wybiera <code>2</code>, więc stan nie wychodzi poza zakres.</p>
+  </div>
+</div>
+
+## Wersja prostsza do nauki
+
+Na lekcji warto najpierw pokazać ten kod w bardziej rozpisanej wersji:
+
+```js
+const [progress, setProgress] = useState(() => {
+  return {
+    unlockedLevel: initialProgress.unlockedLevel,
+    levelResults: initialProgress.levelResults,
+  };
+});
+
+const [currentLevel, setCurrentLevel] = useState(() => {
+  const lastLevelIndex = Math.max(tasks.length - 1, 0);
+  const safeCurrentLevel = Math.min(
+    initialProgress.currentLevel,
+    lastLevelIndex
+  );
+
+  return safeCurrentLevel;
+});
+```
+
+Ta wersja robi to samo, ale łatwiej zobaczyć osobne kroki: najpierw liczymy ostatni poprawny indeks, potem porównujemy go z zapisanym poziomem, a na końcu zwracamy bezpieczną wartość początkową.
+
+## Dla ucznia
+
+<div className="student-box">
+  Dzięki temu kodowi Twoje postępy są zapamiętane, a aplikacja zawsze wybiera poprawny poziom. Nie da się wybrać poziomu, którego nie ma.
+</div>
+
+## Dla nauczyciela
+
+<div className="teacher-box">
+  To dobry przykład do połączenia kilku tematów: leniwej inicjalizacji <code>useState</code>, destrukturyzacji obiektu, indeksów tablicy i zabezpieczania danych wejściowych. Warto poprosić uczniów, żeby samodzielnie policzyli wynik dla pustej tablicy oraz dla zapisanego poziomu większego niż liczba zadań.
+</div>
+
+## Szybkie podsumowanie
+
+| Element | Znaczenie |
+| --- | --- |
+| `useState(() => ...)` | leniwa inicjalizacja, funkcja startowa wykonuje się tylko raz |
+| `unlockedLevel` | indeks ostatniego odblokowanego poziomu |
+| `levelResults` | wyniki z poszczególnych poziomów |
+| `setProgress` | aktualizuje postęp gracza |
+| `currentLevel` | indeks aktualnie wybranego poziomu |
+| `setCurrentLevel` | ustawia aktualny poziom |
+| `Math.max(a, b)` | zwraca większą z dwóch wartości |
+| `Math.min(a, b)` | zwraca mniejszą z dwóch wartości |
+
+## Krótkie podsumowanie
+
+Pierwszy stan przechowuje postęp gracza. Drugi stan przechowuje aktualny poziom. Funkcje `Math.min` i `Math.max` zabezpieczają aplikację przed błędnym indeksem, a funkcja startowa w `useState` pozwala policzyć wartość początkową tylko przy pierwszym renderowaniu komponentu.
