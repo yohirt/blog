@@ -154,6 +154,73 @@
     background: rgba(20,83,45,0.3);
   }
 
+  .article-content .lesson-note,
+  .article-content .student-box,
+  .article-content .teacher-box {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(var(--color-primary-rgb), 0.18);
+    border-left: 5px solid var(--color-primary);
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.92), rgba(237,241,248,0.78));
+    box-shadow: 0 12px 24px -18px rgba(var(--color-primary-rgb), 0.35);
+  }
+
+  html.dark .article-content .lesson-note,
+  html.dark .article-content .student-box,
+  html.dark .article-content .teacher-box {
+    background: linear-gradient(135deg, rgba(15,27,45,0.96), rgba(11,18,32,0.9));
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  .article-content .student-box {
+    border-left-color: rgb(34,197,94);
+  }
+
+  .article-content .teacher-box {
+    border-left-color: rgb(124,58,237);
+  }
+
+  .article-content .flow-card {
+    display: grid;
+    gap: 0.875rem;
+    margin: 2.5rem 0;
+  }
+
+  .article-content .flow-step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.875rem;
+    align-items: start;
+    padding: 1rem;
+    background: var(--color-bg-secondary);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.14);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 20px -18px rgba(var(--color-primary-rgb), 0.38);
+  }
+
+  html.dark .article-content .flow-step {
+    background: var(--color-bg-secondary-dark);
+    border-color: rgba(var(--color-primary-rgb), 0.28);
+  }
+
+  .article-content .flow-step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background: var(--color-primary);
+    color: white;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .article-content .flow-step p {
+    margin: 0;
+  }
+
   /* Inline code highlight variants */
   .article-content .language-js,
   .article-content .language-javascript {
