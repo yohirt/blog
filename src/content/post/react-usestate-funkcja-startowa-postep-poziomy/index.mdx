@@ -2,7 +2,7 @@
 title: "Jak działa useState z funkcją startową w React?"
 publishDate: 2026-06-16
 read: 7
-description: "Wyjaśnienie leniwej inicjalizacji useState, postępu gracza, currentLevel oraz zabezpieczenia indeksu przez Math.min i Math.max."
+description: "Wyjaśnienie leniwej inicjalizacji useState, postępu aplikacji, currentLevel oraz zabezpieczenia indeksu przez Math.min i Math.max."
 tags:
   - React
   - useState
@@ -12,7 +12,7 @@ img_alt: "Infografika wyjaśniająca useState z funkcją startową w React"
 featured: true
 ---
 
-Ten fragment kodu zarządza postępem gracza w aplikacji: przechowuje odblokowane poziomy, wyniki i aktualnie wybrany poziom. Najważniejsze jest to, że drugi stan zabezpiecza aplikację przed wybraniem poziomu, którego już nie ma na liście zadań.
+Ten fragment kodu zarządza postępem w aplikacji: przechowuje odblokowane poziomy, wyniki i aktualnie wybrany poziom. Najważniejsze jest to, że drugi stan zabezpiecza aplikację przed wybraniem poziomu, którego już nie ma na liście zadań.
 
 ```js
 const [{ unlockedLevel, levelResults }, setProgress] = useState(() => ({
@@ -37,7 +37,7 @@ Kod składa się z dwóch stanów:
 
 | Stan | Co przechowuje? |
 | --- | --- |
-| `unlockedLevel` i `levelResults` | postęp gracza oraz wyniki z poziomów |
+| `unlockedLevel` i `levelResults` | postęp oraz wyniki z poziomów |
 | `currentLevel` | indeks aktualnie wybranego poziomu |
 
 Oba stany korzystają z funkcji przekazanej do `useState`, czyli z tak zwanej leniwej inicjalizacji.
@@ -50,7 +50,7 @@ useState(() => {
 
 Taka funkcja wykona się tylko przy pierwszym renderowaniu komponentu. React nie będzie przeliczał tej wartości przy każdym kolejnym renderze.
 
-## Pierwszy stan: postęp gracza
+## Pierwszy stan: postęp
 
 Pierwszy fragment wygląda tak:
 
@@ -65,7 +65,7 @@ Ten stan przechowuje dwie informacje:
 
 | Element | Znaczenie |
 | --- | --- |
-| `unlockedLevel` | poziom, który jest odblokowany dla gracza |
+| `unlockedLevel` | poziom, który jest już odblokowany |
 | `levelResults` | wyniki zapisane dla poszczególnych poziomów |
 | `setProgress` | funkcja do aktualizacji postępu |
 
@@ -104,8 +104,8 @@ useState(() => ({
 
 Nie przekazujemy od razu gotowego obiektu, tylko funkcję, która ten obiekt zwraca. To jest przydatne, gdy wartość początkowa wymaga przygotowania danych albo obliczeń.
 
-<div className="student-box">
-  Możesz myśleć o tym tak: React pyta o wartość początkową tylko na starcie komponentu. Potem stan już żyje własnym życiem i zmienia się przez funkcje aktualizujące.
+<div className="concept-box">
+  Można myśleć o tym tak: React pyta o wartość początkową tylko na starcie komponentu. Potem stan żyje dalej i zmienia się przez funkcje aktualizujące.
 </div>
 
 ## Drugi stan: aktualny poziom
@@ -190,7 +190,7 @@ Math.min(7, 2);
 // 2
 ```
 
-Użytkownik trafi więc na poziom `2`, czyli ostatni dostępny poziom.
+Aplikacja wybierze więc poziom `2`, czyli ostatni dostępny poziom.
 
 <div className="flow-card">
   <div className="flow-step">
@@ -211,9 +211,9 @@ Użytkownik trafi więc na poziom `2`, czyli ostatni dostępny poziom.
   </div>
 </div>
 
-## Wersja prostsza do nauki
+## Wersja bardziej czytelna
 
-Na lekcji warto najpierw pokazać ten kod w bardziej rozpisanej wersji:
+Ten sam mechanizm można zapisać bardziej opisowo:
 
 ```js
 const [progress, setProgress] = useState(() => {
@@ -236,16 +236,16 @@ const [currentLevel, setCurrentLevel] = useState(() => {
 
 Ta wersja robi to samo, ale łatwiej zobaczyć osobne kroki: najpierw liczymy ostatni poprawny indeks, potem porównujemy go z zapisanym poziomem, a na końcu zwracamy bezpieczną wartość początkową.
 
-## Dla ucznia
+## Jak o tym myśleć?
 
-<div className="student-box">
-  Dzięki temu kodowi Twoje postępy są zapamiętane, a aplikacja zawsze wybiera poprawny poziom. Nie da się wybrać poziomu, którego nie ma.
+<div className="concept-box">
+  Kod ustawia początkowy postęp i pilnuje, żeby aktualny poziom zawsze wskazywał istniejące zadanie. Jeśli zapisany stan jest nieaktualny, aplikacja automatycznie wybiera najbliższą poprawną wartość.
 </div>
 
-## Dla nauczyciela
+## Kiedy ten wzorzec jest przydatny?
 
-<div className="teacher-box">
-  To dobry przykład do połączenia kilku tematów: leniwej inicjalizacji <code>useState</code>, destrukturyzacji obiektu, indeksów tablicy i zabezpieczania danych wejściowych. Warto poprosić uczniów, żeby samodzielnie policzyli wynik dla pustej tablicy oraz dla zapisanego poziomu większego niż liczba zadań.
+<div className="usage-box">
+  Ten wzorzec sprawdza się wszędzie tam, gdzie aplikacja odtwarza zapisany stan, ale dane mogły się zmienić: w kursach, checklistach, kreatorach krokowych, grach, dashboardach i konfiguratorach. Leniwa inicjalizacja pozwala policzyć wartość początkową tylko raz, a <code>Math.min</code> i <code>Math.max</code> chronią indeks przed wyjściem poza zakres.
 </div>
 
 ## Szybkie podsumowanie
@@ -255,7 +255,7 @@ Ta wersja robi to samo, ale łatwiej zobaczyć osobne kroki: najpierw liczymy os
 | `useState(() => ...)` | leniwa inicjalizacja, funkcja startowa wykonuje się tylko raz |
 | `unlockedLevel` | indeks ostatniego odblokowanego poziomu |
 | `levelResults` | wyniki z poszczególnych poziomów |
-| `setProgress` | aktualizuje postęp gracza |
+| `setProgress` | aktualizuje postęp |
 | `currentLevel` | indeks aktualnie wybranego poziomu |
 | `setCurrentLevel` | ustawia aktualny poziom |
 | `Math.max(a, b)` | zwraca większą z dwóch wartości |
@@ -263,4 +263,4 @@ Ta wersja robi to samo, ale łatwiej zobaczyć osobne kroki: najpierw liczymy os
 
 ## Krótkie podsumowanie
 
-Pierwszy stan przechowuje postęp gracza. Drugi stan przechowuje aktualny poziom. Funkcje `Math.min` i `Math.max` zabezpieczają aplikację przed błędnym indeksem, a funkcja startowa w `useState` pozwala policzyć wartość początkową tylko przy pierwszym renderowaniu komponentu.
+Pierwszy stan przechowuje postęp. Drugi stan przechowuje aktualny poziom. Funkcje `Math.min` i `Math.max` zabezpieczają aplikację przed błędnym indeksem, a funkcja startowa w `useState` pozwala policzyć wartość początkową tylko przy pierwszym renderowaniu komponentu.

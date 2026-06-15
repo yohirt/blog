@@ -155,8 +155,8 @@
   }
 
   .article-content .lesson-note,
-  .article-content .student-box,
-  .article-content .teacher-box {
+  .article-content .concept-box,
+  .article-content .usage-box {
     margin: 2rem 0;
     padding: 1.25rem 1.5rem;
     border: 1px solid rgba(var(--color-primary-rgb), 0.18);
@@ -167,17 +167,17 @@
   }
 
   html.dark .article-content .lesson-note,
-  html.dark .article-content .student-box,
-  html.dark .article-content .teacher-box {
+  html.dark .article-content .concept-box,
+  html.dark .article-content .usage-box {
     background: linear-gradient(135deg, rgba(15,27,45,0.96), rgba(11,18,32,0.9));
     border-color: rgba(var(--color-primary-rgb), 0.3);
   }
 
-  .article-content .student-box {
+  .article-content .concept-box {
     border-left-color: rgb(34,197,94);
   }
 
-  .article-content .teacher-box {
+  .article-content .usage-box {
     border-left-color: rgb(124,58,237);
   }
 

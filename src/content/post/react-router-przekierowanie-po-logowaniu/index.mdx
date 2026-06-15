@@ -12,7 +12,7 @@ img_alt: "Infografika wyjaśniająca przekierowanie po zalogowaniu w React Route
 featured: true
 ---
 
-Ten fragment kodu często pojawia się na stronie logowania. Jego zadaniem jest przekierowanie użytkownika tam, skąd przyszedł, albo na domyślną stronę aplikacji, jeśli wcześniejsza ścieżka nie została zapamiętana.
+Ten fragment kodu często pojawia się na stronie logowania. Jego zadaniem jest przekierowanie osoby korzystającej z aplikacji tam, skąd przyszła, albo na domyślną stronę aplikacji, jeśli wcześniejsza ścieżka nie została zapamiętana.
 
 ```js
 const redirectPath = location.state?.from?.pathname ?? "/wyzwania";
@@ -30,15 +30,15 @@ useEffect(() => {
 
 ## Co robi ten kod?
 
-Kod najpierw ustala adres, na który użytkownik powinien wrócić po zalogowaniu:
+Kod najpierw ustala adres, na który aplikacja powinna przejść po zalogowaniu:
 
 ```js
 const redirectPath = location.state?.from?.pathname ?? "/wyzwania";
 ```
 
-Jeśli aplikacja zapamiętała, że użytkownik próbował wejść np. na `/panel`, to po logowaniu wróci właśnie tam. Jeśli takiej informacji nie ma, użyje adresu domyślnego: `/wyzwania`.
+Jeśli aplikacja zapamiętała, że wcześniej była próba wejścia np. na `/panel`, to po logowaniu wraca właśnie tam. Jeśli takiej informacji nie ma, używa adresu domyślnego: `/wyzwania`.
 
-Druga część kodu czeka, aż pojawi się zalogowany użytkownik:
+Druga część kodu czeka, aż pojawi się zalogowany `user`:
 
 ```js
 useEffect(() => {
@@ -54,7 +54,7 @@ Gdy `user` istnieje, aplikacja wykonuje przekierowanie.
 
 ### 1. `location.state?.from?.pathname`
 
-`location.state` to miejsce, w którym React Router może przechować dodatkową informację o nawigacji. Przy chronionych stronach często zapisuje się tam adres, na który użytkownik próbował wejść przed logowaniem.
+`location.state` to miejsce, w którym React Router może przechować dodatkową informację o nawigacji. Przy chronionych stronach często zapisuje się tam adres, na który ktoś próbował wejść przed logowaniem.
 
 Przykład:
 
@@ -102,12 +102,12 @@ To daje prostą regułę:
 
 | Sytuacja | Wynik |
 | --- | --- |
-| zapamiętano adres `/panel` | użytkownik trafi na `/panel` |
-| nie zapamiętano adresu | użytkownik trafi na `/wyzwania` |
+| zapamiętano adres `/panel` | aplikacja przechodzi na `/panel` |
+| nie zapamiętano adresu | aplikacja przechodzi na `/wyzwania` |
 
 ### 4. `useEffect`
 
-`useEffect` służy tu do wykonania akcji po zmianie stanu komponentu. W tym przypadku akcją jest przekierowanie po tym, jak użytkownik zostanie zalogowany.
+`useEffect` służy tu do wykonania akcji po zmianie stanu komponentu. W tym przypadku akcją jest przekierowanie po tym, jak pojawi się zalogowany `user`.
 
 Tablica zależności wygląda tak:
 
@@ -121,64 +121,64 @@ Najważniejsza będzie zwykle zmiana `user`. Przed logowaniem `user` jest pusty.
 
 ### 5. `navigate(redirectPath, { replace: true })`
 
-`navigate` przenosi użytkownika na wybrany adres.
+`navigate` przenosi aplikację na wybrany adres.
 
 ```js
 navigate(redirectPath, { replace: true });
 ```
 
-Opcja `{ replace: true }` zastępuje bieżący wpis w historii przeglądarki. Dzięki temu po zalogowaniu użytkownik nie wraca przyciskiem „Wstecz” na stronę logowania.
+Opcja `{ replace: true }` zastępuje bieżący wpis w historii przeglądarki. Dzięki temu po zalogowaniu przycisk „Wstecz” nie cofa na stronę logowania.
 
 ## Przykład w praktyce
 
 <div className="flow-card">
   <div className="flow-step">
     <span>1</span>
-    <p>Użytkownik chce wejść na chronioną stronę, np. <code>/panel</code>.</p>
+    <p>Ktoś próbuje wejść na chronioną stronę, np. <code>/panel</code>.</p>
   </div>
   <div className="flow-step">
     <span>2</span>
-    <p>Aplikacja przenosi go na <code>/login</code> i zapisuje, skąd przyszedł.</p>
+    <p>Aplikacja przenosi na <code>/login</code> i zapisuje, skąd nastąpiło wejście.</p>
   </div>
   <div className="flow-step">
     <span>3</span>
-    <p>Użytkownik wpisuje dane i loguje się.</p>
+    <p>Po zalogowaniu zmienia się wartość <code>user</code>.</p>
   </div>
   <div className="flow-step">
     <span>4</span>
-    <p>Kod odczytuje zapisaną ścieżkę i przekierowuje użytkownika.</p>
+    <p>Kod odczytuje zapisaną ścieżkę i wykonuje przekierowanie.</p>
   </div>
   <div className="flow-step">
     <span>5</span>
-    <p>Jeśli ścieżki nie było, użytkownik trafia na <code>/wyzwania</code>.</p>
+    <p>Jeśli ścieżki nie było, aplikacja przechodzi na <code>/wyzwania</code>.</p>
   </div>
 </div>
 
 ![Infografika przedstawiająca działanie przekierowania po zalogowaniu](/assets/blog/react-router-przekierowanie-po-logowaniu.png)
 
-## Dla ucznia
+## Jak o tym myśleć?
 
-<div className="student-box">
-  Wyobraź sobie, że aplikacja zostawia karteczkę: „po zalogowaniu wróć na <code>/panel</code>”. Jeśli karteczki nie ma, aplikacja wysyła użytkownika na bezpieczne miejsce startowe, czyli <code>/wyzwania</code>.
+<div className="concept-box">
+  Aplikacja może zostawić sobie krótką informację: „po logowaniu wróć na <code>/panel</code>”. Jeśli takiej informacji nie ma, wybiera bezpieczne miejsce startowe, czyli <code>/wyzwania</code>.
 </div>
 
-## Dla nauczyciela
+## Kiedy ten wzorzec jest przydatny?
 
-<div className="teacher-box">
-  Ten przykład dobrze nadaje się do omówienia routingu chronionego, stanu przekazywanego w nawigacji oraz różnicy między <code>??</code> i <code>||</code>. Warto szczególnie podkreślić, że tablica zależności w <code>useEffect</code> reaguje na zmianę dowolnej zależności, a nie kompletu zależności naraz.
+<div className="usage-box">
+  Ten wzorzec sprawdza się w routingu chronionym: panelach użytkownika, dashboardach, koszykach, ekranach ustawień i wszędzie tam, gdzie po logowaniu warto wrócić do pierwotnie wybranego miejsca. Dobrze pokazuje też różnicę między <code>??</code> i <code>||</code> oraz praktyczne użycie stanu przekazywanego przez nawigację.
 </div>
 
 ## Tablica podsumowująca
 
 | Element kodu | Co robi? | Zapamiętaj |
 | --- | --- | --- |
-| `location.state?.from?.pathname` | Pobiera zapamiętaną ścieżkę | Jeśli istnieje, użytkownik wróci na poprzednią stronę |
+| `location.state?.from?.pathname` | Pobiera zapamiętaną ścieżkę | Jeśli istnieje, aplikacja wróci na poprzednią stronę |
 | `?.` | Bezpiecznie czyta zagnieżdżone pola | Chroni przed błędem, gdy czegoś brakuje |
 | `?? "/wyzwania"` | Ustawia ścieżkę domyślną | Działa tylko przy `null` lub `undefined` |
 | `useEffect(...)` | Reaguje na zmianę zależności | Wystarczy zmiana jednej wartości |
-| `if (user)` | Sprawdza, czy użytkownik jest zalogowany | Bez użytkownika nie ma przekierowania |
-| `{ replace: true }` | Podmienia historię przeglądarki | Przycisk „Wstecz” nie wraca do logowania |
+| `if (user)` | Sprawdza, czy jest zalogowany użytkownik | Bez użytkownika nie ma przekierowania |
+| `{ replace: true }` | Podmienia historię przeglądarki | „Wstecz” nie wraca do logowania |
 
 ## Krótkie podsumowanie
 
-Ten kod robi trzy rzeczy: ustala docelowy adres, czeka na zalogowanego użytkownika i przenosi go dalej. Dzięki `?.` nie wywraca się na brakujących danych, dzięki `??` ma sensowny adres awaryjny, a dzięki `{ replace: true }` zachowuje się wygodnie z perspektywy użytkownika.
+Ten kod robi trzy rzeczy: ustala docelowy adres, czeka na zalogowanego użytkownika i przenosi aplikację dalej. Dzięki `?.` nie wywraca się na brakujących danych, dzięki `??` ma sensowny adres awaryjny, a dzięki `{ replace: true }` zachowuje historię przeglądarki w wygodny sposób.
