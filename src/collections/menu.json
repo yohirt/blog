@@ -13,6 +13,7 @@
 	},
 	{
 		"name": "O mnie",
-		"url": "/about"
+		"url": "/about",
+		"isShow": false
 	}
 ]
