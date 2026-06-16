@@ -5,7 +5,6 @@ import Footer from "@/components/sections/Footer.astro";
 import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
 import { withBase } from "@/utils/paths";
-import mainScript from "../assets/js/main.js?url";
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
@@ -54,6 +53,8 @@ import '../styles/article-enhancements.css';
     <Header />
     <slot />
     <Footer />
-    <script is:inline src={mainScript}></script>
+    <script>
+      import "../assets/js/main.js";
+    </script>
   </body>
 </html>
