@@ -26,10 +26,7 @@ let headerElement = null;
 document.addEventListener("DOMContentLoaded", () => {
 	headerElement = document.getElementById("header");
 
-	if (
-		localStorage.getItem("dark_mode") &&
-		localStorage.getItem("dark_mode") === "true"
-	) {
+	if (localStorage.getItem("dark_mode") !== "false") {
 		window.darkMode = true;
 		showNight();
 	} else {
@@ -68,6 +65,8 @@ window.stickyHeaderFuncionality = () => {
 };
 
 window.evaluateHeaderPosition = () => {
+	if (!headerElement?.firstElementChild) return;
+
 	if (window.scrollY > 48) {
 		headerElement.firstElementChild.classList.add(...stickyClassesContainer);
 		headerElement.firstElementChild.classList.remove(
@@ -87,21 +86,21 @@ window.evaluateHeaderPosition = () => {
 	}
 };
 
-document.getElementById("darkToggle").addEventListener("click", () => {
+document.getElementById("darkToggle")?.addEventListener("click", () => {
 	document.documentElement.classList.add("duration-300");
 
 	if (document.documentElement.classList.contains("dark")) {
-		localStorage.removeItem("dark_mode");
+		localStorage.setItem("dark_mode", "false");
 		showDay(true);
 	} else {
-		localStorage.setItem("dark_mode", true);
+		localStorage.setItem("dark_mode", "true");
 		showNight(true);
 	}
 });
 
 function showDay(animate) {
-	document.getElementById("sun").classList.remove("setting");
-	document.getElementById("moon").classList.remove("rising");
+	document.getElementById("sun")?.classList.remove("setting");
+	document.getElementById("moon")?.classList.remove("rising");
 
 	let timeout = 0;
 
@@ -112,22 +111,22 @@ function showDay(animate) {
 	}
 
 	setTimeout(() => {
-		document.getElementById("dayText").classList.remove("hidden");
-		document.getElementById("nightText").classList.add("hidden");
+		document.getElementById("dayText")?.classList.remove("hidden");
+		document.getElementById("nightText")?.classList.add("hidden");
 
-		document.getElementById("moon").classList.add("hidden");
-		document.getElementById("sun").classList.remove("hidden");
+		document.getElementById("moon")?.classList.add("hidden");
+		document.getElementById("sun")?.classList.remove("hidden");
 
 		if (animate) {
 			document.documentElement.classList.remove("dark");
-			document.getElementById("sun").classList.add("rising");
+			document.getElementById("sun")?.classList.add("rising");
 		}
 	}, timeout);
 }
 
 function showNight(animate) {
-	document.getElementById("moon").classList.remove("setting");
-	document.getElementById("sun").classList.remove("rising");
+	document.getElementById("moon")?.classList.remove("setting");
+	document.getElementById("sun")?.classList.remove("rising");
 
 	let timeout = 0;
 
@@ -138,15 +137,15 @@ function showNight(animate) {
 	}
 
 	setTimeout(() => {
-		document.getElementById("nightText").classList.remove("hidden");
-		document.getElementById("dayText").classList.add("hidden");
+		document.getElementById("nightText")?.classList.remove("hidden");
+		document.getElementById("dayText")?.classList.add("hidden");
 
-		document.getElementById("sun").classList.add("hidden");
-		document.getElementById("moon").classList.remove("hidden");
+		document.getElementById("sun")?.classList.add("hidden");
+		document.getElementById("moon")?.classList.remove("hidden");
 
 		if (animate) {
 			document.documentElement.classList.add("dark");
-			document.getElementById("moon").classList.add("rising");
+			document.getElementById("moon")?.classList.add("rising");
 		}
 	}, timeout);
 }
@@ -162,32 +161,32 @@ window.applyMenuItemClasses = () => {
 };
 
 function mobileMenuFunctionality() {
-	document.getElementById("openMenu").addEventListener("click", () => {
+	document.getElementById("openMenu")?.addEventListener("click", () => {
 		openMobileMenu();
 	});
 
-	document.getElementById("closeMenu").addEventListener("click", () => {
+	document.getElementById("closeMenu")?.addEventListener("click", () => {
 		closeMobileMenu();
 	});
 }
 
 window.openMobileMenu = () => {
-	document.getElementById("openMenu").classList.add("hidden");
-	document.getElementById("closeMenu").classList.remove("hidden");
-	document.getElementById("menu").classList.remove("hidden");
-	document.getElementById("mobileMenuBackground").classList.add("opacity-0");
-	document.getElementById("mobileMenuBackground").classList.remove("hidden");
+	document.getElementById("openMenu")?.classList.add("hidden");
+	document.getElementById("closeMenu")?.classList.remove("hidden");
+	document.getElementById("menu")?.classList.remove("hidden");
+	document.getElementById("mobileMenuBackground")?.classList.add("opacity-0");
+	document.getElementById("mobileMenuBackground")?.classList.remove("hidden");
 
 	setTimeout(() => {
 		document
 			.getElementById("mobileMenuBackground")
-			.classList.remove("opacity-0");
+			?.classList.remove("opacity-0");
 	}, 1);
 };
 
 window.closeMobileMenu = () => {
-	document.getElementById("closeMenu").classList.add("hidden");
-	document.getElementById("openMenu").classList.remove("hidden");
-	document.getElementById("menu").classList.add("hidden");
-	document.getElementById("mobileMenuBackground").classList.add("hidden");
+	document.getElementById("closeMenu")?.classList.add("hidden");
+	document.getElementById("openMenu")?.classList.remove("hidden");
+	document.getElementById("menu")?.classList.add("hidden");
+	document.getElementById("mobileMenuBackground")?.classList.add("hidden");
 };

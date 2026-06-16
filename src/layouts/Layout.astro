@@ -5,7 +5,6 @@ import Footer from "@/components/sections/Footer.astro";
 import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
 import { withBase } from "@/utils/paths";
-import mainScript from "../assets/js/main.js?url";
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
@@ -38,10 +37,8 @@ import '../styles/article-enhancements.css';
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script is:inline>
       if (typeof Storage !== 'undefined') {
-        if (
-          localStorage.getItem('dark_mode') &&
-          localStorage.getItem('dark_mode') == 'true'
-        ) {
+        const savedTheme = localStorage.getItem('dark_mode');
+        if (savedTheme !== 'false') {
           document.documentElement.classList.add('dark')
         }
       }
@@ -54,6 +51,8 @@ import '../styles/article-enhancements.css';
     <Header />
     <slot />
     <Footer />
-    <script is:inline src={mainScript}></script>
+    <script>
+      import "../assets/js/main.js";
+    </script>
   </body>
 </html>
