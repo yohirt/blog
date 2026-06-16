@@ -1,4 +1,6 @@
 ---
+import { withBase } from "@/utils/paths";
+
 export interface Props {
 	url: string; // Button link URL
 	type?: "solid" | "fill" | "disabled"; // Button type, optional, default is "solid"
@@ -8,6 +10,7 @@ export interface Props {
 }
 
 const { url, type = "solid", className = "", target = "_self", size = "md" } = Astro.props;
+const href = type === "disabled" ? "javascript:void(0)" : withBase(url);
 
 // Define padding and font size for different button sizes
 const sizeClasses = {
@@ -42,7 +45,7 @@ const sizeClasses = {
 const currentSizeClasses = sizeClasses[size];
 ---
 <a
-  href={type === "disabled" ? "javascript:void(0)" : url}
+  href={href}
   target={type === "disabled" ? undefined : target}
   class={`${
     type === "solid"

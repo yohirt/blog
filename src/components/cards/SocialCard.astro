@@ -1,5 +1,6 @@
 ---
 import social from "@/collections/social.json";
+import { withBase } from "@/utils/paths";
 const { displaySocialIds } = Astro.props;
 // 配置要显示的社交媒体 ID（留空则显示所有）
 //const displaySocialIds: number[] = [1, 2, 3]; // 只显示 ID 为 1, 2, 3 的社交媒体
@@ -25,7 +26,7 @@ const filteredSocial = social.filter(item => {
         style={`--index: ${index}; --total: ${filteredSocial.length};`}
       >
         <img
-          src={item.image}
+          src={withBase(item.image)}
           alt={item.name}
           class="social-image"
         />

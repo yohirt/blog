@@ -1,4 +1,6 @@
 ---
+import { withBase } from "@/utils/paths";
+
 interface Props {
   name: string;          // Required
   image: string;         // Required
@@ -27,6 +29,9 @@ const {
 
 // Generate stable id for each video for precise playback control
 const videoId = `workcard-video-${index}-${name.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}`;
+const imageSrc = withBase(image);
+const videoSrc = video ? withBase(video) : undefined;
+const urlSrc = withBase(url);
 ---
 
 <article
@@ -45,8 +50,8 @@ const videoId = `workcard-video-${index}-${name.replace(/[^a-z0-9]+/gi, '-').toL
       <!-- Video -->
       <video
         id={videoId}
-        src={video}
-        poster={image}
+        src={videoSrc}
+        poster={imageSrc}
         autoplay
         loop
         muted
@@ -58,13 +63,13 @@ const videoId = `workcard-video-${index}-${name.replace(/[^a-z0-9]+/gi, '-').toL
         controlslist="nodownload noplaybackrate nofullscreen noremoteplayback"
         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       >
-        <source src={video} type="video/mp4" />
+        <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     ) : (
       <!-- Image -->
       <img
-        src={image}
+        src={imageSrc}
         alt={name}
         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-primary/10"
         loading="lazy"
@@ -155,7 +160,7 @@ const videoId = `workcard-video-${index}-${name.replace(/[^a-z0-9]+/gi, '-').toL
 
   <!-- Link overlay for entire card -->
   <a
-    href={url}
+    href={urlSrc}
     target={target}
     rel={target === "_blank" ? "noopener noreferrer" : undefined}
     class="absolute inset-0 z-10"

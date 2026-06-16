@@ -3,6 +3,7 @@ import { Mail, Moon, SunMedium,Download } from "@lucide/astro";
 import menus from "@/collections/menu.json";
 import Button from "@/components/ui/Button.astro";
 import Logo from "@/components/ui/Logo.astro";
+import { withBase } from "@/utils/paths";
 ---
 
 <!-- This is an invisible div with relative position so that it takes up the height of the menu (because menu is absolute/fixed) -->
@@ -99,7 +100,7 @@ import Logo from "@/components/ui/Logo.astro";
             menus.filter((menu) => menu.isShow !== false).map((menu) => {
               return (
                 <a
-                  href={menu.url}
+                  href={withBase(menu.url)}
                   class="relative flex items-center justify-center w-full sm:w-auto px-5 py-2.5 sm:py-2 sm:px-3 md:px-4 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounded-none text-neutral-700 dark:text-neutral-200   hover:text-primary sm:hover:bg-transparent dark:hover:text-white dark:hover:bg-neutral-800/50 sm:dark:hover:bg-transparent active:scale-[0.98] sm:active:scale-100 transition-all"
                 >
                   {menu.name}

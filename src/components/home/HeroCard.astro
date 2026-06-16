@@ -1,4 +1,6 @@
 ---
+import { withBase } from "@/utils/paths";
+
 interface Props {
   imageUrl: string;
   title?: string;
@@ -14,7 +16,7 @@ const {
 
 <div class="hero-card relative z-20 w-full">
   <a
-    href={link || undefined}
+    href={link ? withBase(link) : undefined}
     aria-label={title}
     class:list={[
       "block overflow-hidden rounded-xl border border-primary/40 dark:border-primary/60",
@@ -22,7 +24,7 @@ const {
     ]}
   >
     <img
-      src={imageUrl}
+      src={withBase(imageUrl)}
       alt={title}
       loading="eager"
       decoding="auto"

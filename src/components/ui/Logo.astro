@@ -1,10 +1,14 @@
+---
+import { withBase } from "@/utils/paths";
+---
+
 <a
-  href="/"
+  href={withBase("/")}
   aria-label="eRTe"
   class="h-12 text-base group relative z-30 flex items-center"
 >
   <img
-    src="/assets/logo-erte-horizontal.png"
+    src={withBase("/assets/logo-erte-horizontal.png")}
     alt="eRTe"
     class="h-12 w-auto rounded-[9px]"
   />

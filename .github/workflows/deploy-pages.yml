@@ -18,7 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PUBLIC_SITE_URL: https://yohirt.github.io/blog/
+      PUBLIC_SITE_URL: https://koduje.edu.pl/blog/
       PUBLIC_BASE_PATH: /blog/
     steps:
       - name: Checkout

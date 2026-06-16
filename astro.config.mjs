@@ -11,6 +11,29 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const siteUrl = process.env.PUBLIC_SITE_URL || 'https://portfolio.ricoui.com/';
 const basePath = process.env.PUBLIC_BASE_PATH || '/';
 
+function remarkPublicAssetBase() {
+  return (tree) => {
+    const visit = (node) => {
+      if (!node || typeof node !== 'object') return;
+
+      if (
+        node.type === 'image' &&
+        typeof node.url === 'string' &&
+        node.url.startsWith('/assets/') &&
+        basePath !== '/'
+      ) {
+        node.url = `${basePath.replace(/\/$/, '')}${node.url}`;
+      }
+
+      if (Array.isArray(node.children)) {
+        node.children.forEach(visit);
+      }
+    };
+
+    visit(tree);
+  };
+}
+
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
@@ -30,4 +53,7 @@ export default defineConfig({
   },
 
   integrations: [mdx(), sitemap()],
+  markdown: {
+    remarkPlugins: [remarkPublicAssetBase],
+  },
 });

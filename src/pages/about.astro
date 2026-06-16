@@ -17,6 +17,7 @@ import Button from "@/components/ui/Button.astro";
 import Matter from "@/components/ui/Matter.astro";
 import Layout from "@/layouts/Layout.astro";
 import Toc from "@/components/widgets/Toc.astro";
+import { withBase } from "@/utils/paths";
 
 // Manually define page table of contents structure
 const headings = [
@@ -71,7 +72,7 @@ const filtered = headings.filter(h => h.depth <= 3);
           data-aos-duration="500"
           data-aos-once="true"
         >
-            <img src="/assets/avatar.png" alt="Ricoui" class="w-14 h-14 rounded-full">
+            <img src={withBase("/assets/avatar.png")} alt="Ricoui" class="w-14 h-14 rounded-full">
             <div class="flex items-center gap-3">
               <a href="https://www.ricoui.com/" target="_blank" class="font-brand text-[24px] text-neutral-700 dark:text-neutral-100">Rico</a>
               <span class="text-[0.75em] text-neutral-400">|</span>
@@ -115,7 +116,7 @@ const filtered = headings.filter(h => h.depth <= 3);
                       data-aos-once="true"
                     >
                       <img
-                        src={item.image}
+                        src={withBase(item.image)}
                         alt={item.name}
                         class="w-[96px] h-[96px] rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
                       />

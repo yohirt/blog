@@ -3,6 +3,7 @@ import SectionHeader from "@/components/elements/SectionHeader.astro";
 import Matter from "@/components/ui/Matter.astro";
 import Button from "@/components/ui/Button.astro";
 import Tools from "../ui/Tools.astro";
+import { withBase } from "@/utils/paths";
 interface Props {
   title?: string;
   description?: string;
@@ -36,7 +37,7 @@ const {title, description
                         </div> -->
                     </div>
                     <div class="absolute keyboard right-[-35%] sm:right-[-50%] md:right-[-58%] bottom-0 top-0 flex items-center self-center w-[300px] sm:w-[320px] md:w-[390px] h-auto">
-                        <img src="/assets/tools/keyboard.png" alt="Keyboard" class="w-full h-full object-cover">
+                        <img src={withBase("/assets/tools/keyboard.png")} alt="Keyboard" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="explore-item bg-bg-secondary/75   dark:bg-bg-secondary-dark  relative overflow-hidden rounded-xl border border-primary/15 dark:border-neutral-700/50 explore-item-2 h-[180px] sm:h-[200px]"
@@ -50,19 +51,19 @@ const {title, description
                     </div>
                     <div class="explore-figure game-container absolute right-0 bottom-0 top-0 w-full h-full">
                         <div class="absolute game right-[-21%] bottom-0 top-0 mt-[-10%] flex items-center self-center w-auto h-[100px] sm:h-[120px] md:h-[130px] z-10" data-game="1">
-                            <img src="/assets/tools/game/05-game-cassette.png" alt="Game Cassette 5" class="w-full h-full object-cover self-center flex">
+                            <img src={withBase("/assets/tools/game/05-game-cassette.png")} alt="Game Cassette 5" class="w-full h-full object-cover self-center flex">
                         </div>
                         <div class="absolute game right-[-19%] bottom-0 top-0 mt-[-5%] flex items-center self-center w-auto h-[100px] sm:h-[120px] md:h-[130px] z-20" data-game="2">
-                            <img src="/assets/tools/game/04-game-cassette.png" alt="Game Cassette 4" class="w-full h-full object-cover self-center flex">
+                            <img src={withBase("/assets/tools/game/04-game-cassette.png")} alt="Game Cassette 4" class="w-full h-full object-cover self-center flex">
                         </div>
                         <div class="absolute game right-[-16%] bottom-0 top-0 mt-0 flex items-center self-center w-auto h-[100px] sm:h-[120px] md:h-[130px] z-30" data-game="3">
-                            <img src="/assets/tools/game/03-game-cassette.png" alt="Game Cassette 3" class="w-full h-full object-cover self-center flex">
+                            <img src={withBase("/assets/tools/game/03-game-cassette.png")} alt="Game Cassette 3" class="w-full h-full object-cover self-center flex">
                         </div>
                         <div class="absolute game right-[-13%] bottom-0 top-0 mt-[5%] flex items-center self-center w-auto h-[100px] sm:h-[120px] md:h-[130px] z-40" data-game="4">
-                            <img src="/assets/tools/game/02-game-cassette.png" alt="Game Cassette 2" class="w-full h-full object-cover self-center flex">
+                            <img src={withBase("/assets/tools/game/02-game-cassette.png")} alt="Game Cassette 2" class="w-full h-full object-cover self-center flex">
                         </div>
                         <div class="absolute game right-[-10%] bottom-0 top-0 mt-[10%] flex items-center self-center w-auto h-[100px] sm:h-[120px] md:h-[130px] z-50" data-game="5">
-                            <img src="/assets/tools/game/01-game-cassette.png" alt="Game Cassette 1" class="w-full h-full object-cover self-center flex">
+                            <img src={withBase("/assets/tools/game/01-game-cassette.png")} alt="Game Cassette 1" class="w-full h-full object-cover self-center flex">
                         </div>
                     </div>
                 </div>
@@ -85,12 +86,12 @@ const {title, description
                         </div>
                     </div>
                     <div class="explore-figure computer absolute right-[5%] sm:right-[-10%] md:right-[-7%] bottom-[14%] w-[120px] sm:w-[130px] md:w-[148px] h-auto">
-                        <img src="/assets/tools/retro-computer.png" alt="Explore 1" class="w-full h-full object-cover z-10 relative">
+                        <img src={withBase("/assets/tools/retro-computer.png")} alt="Explore 1" class="w-full h-full object-cover z-10 relative">
                         <div class="computer-screen absolute inset-0 w-[92px] sm:w-[100px] md:w-[116px] h-[76px] sm:h-[86px] md:h-[96px] top-[10.5%] left-[10%] rounded-[8px] rounded-b-[3px] overflow-hidden z-20">
                           <video
                             id="explore-computer-video"
-                            src="/assets/tools/dreamcore.mp4"
-                            poster="/assets/tools/dreamcore.jpg"
+                            src={withBase("/assets/tools/dreamcore.mp4")}
+                            poster={withBase("/assets/tools/dreamcore.jpg")}
                             autoplay
                             loop
                             muted

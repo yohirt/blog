@@ -16,6 +16,11 @@
   import Matter from "matter-js";
 
   (() => {
+    const baseUrl = import.meta.env.BASE_URL || "/";
+    const withBase = (path: string) => {
+      if (baseUrl === "/" || !path.startsWith("/")) return path;
+      return `${baseUrl.replace(/\/$/, "")}${path}`;
+    };
     const target = document.querySelector(".tricks-view");
     if (!target) {
       console.error("[Tricks] .tricks-view not found");
@@ -91,23 +96,23 @@
 
       // Icon paths (adjust as needed)
       const iconUrls = [
-        "/assets/stack/astro.png",
-        "/assets/stack/css.png",
-        "/assets/stack/github.png",
-        "/assets/stack/html.png",
-        "/assets/stack/bootstrap.png",
-        "/assets/stack/js.png",
-        "/assets/stack/netlify.png",
-        "/assets/stack/nodejs.png",
-        "/assets/stack/npm.png",
-        "/assets/stack/tailwind.png",
-        "/assets/stack/vercel.png",
-        "/assets/stack/vscode.png",
-        "/assets/stack/koduje.png",
+        withBase("/assets/stack/astro.png"),
+        withBase("/assets/stack/css.png"),
+        withBase("/assets/stack/github.png"),
+        withBase("/assets/stack/html.png"),
+        withBase("/assets/stack/bootstrap.png"),
+        withBase("/assets/stack/js.png"),
+        withBase("/assets/stack/netlify.png"),
+        withBase("/assets/stack/nodejs.png"),
+        withBase("/assets/stack/npm.png"),
+        withBase("/assets/stack/tailwind.png"),
+        withBase("/assets/stack/vercel.png"),
+        withBase("/assets/stack/vscode.png"),
+        withBase("/assets/stack/koduje.png"),
       ];
 
       const iconScaleOverrides = new Map<string, number>([
-        ["/assets/stack/koduje.png", 1.6],
+        [withBase("/assets/stack/koduje.png"), 1.6],
       ]);
 
       // Preload images to obtain naturalWidth/Height

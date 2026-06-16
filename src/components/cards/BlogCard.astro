@@ -1,4 +1,6 @@
 ---
+import { withBase } from "@/utils/paths";
+
 const { content, layout = "vertical", "data-aos": dataAos, "data-aos-delay": dataAosDelay } = Astro.props;
 
 const {
@@ -18,7 +20,7 @@ const formattedDate = new Date(publishDate).toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-const postLink = link || `/blog/${slug}`;
+const postLink = withBase(link || `/blog/${slug}`);
 
 // Check if horizontal layout
 const isHorizontal = layout === "horizontal";
@@ -42,7 +44,7 @@ const isHorizontal = layout === "horizontal";
     <!-- Image -->
     {img ? (
       <img
-        src={img}
+        src={withBase(img)}
         alt={img_alt || `Related to ${title}`}
         loading="lazy"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

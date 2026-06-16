@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "@lucide/astro";
+import { withBase } from "@/utils/paths";
 
 const missionStats = [
   { value: "01", label: "misje krok po kroku" },
@@ -90,7 +91,7 @@ const pillars = [
         <div class="relative">
           <div class="absolute -inset-2 border border-orange-500/30 bg-orange-500/5 blur-xl"></div>
           <img
-            src="/assets/projects/koduje-space-quest-hero.png"
+            src={withBase("/assets/projects/koduje-space-quest-hero.png")}
             alt="Kosmiczny panel misji do nauki programowania"
             class="relative aspect-video w-full border border-orange-500/45 object-cover shadow-[0_0_60px_rgba(255,91,32,0.2)] clip-mission"
             loading="eager"
@@ -168,7 +169,7 @@ const pillars = [
 
               <div class="relative aspect-video overflow-hidden border border-slate-700/80 bg-black">
                 <img
-                  src={project.image}
+                  src={withBase(project.image)}
                   alt={project.name}
                   class="h-full w-full object-cover opacity-90 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
                   loading={index === 0 ? "eager" : "lazy"}

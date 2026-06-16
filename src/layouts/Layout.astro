@@ -4,6 +4,8 @@ import TopBg from "@/components/ui/TopBg.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
+import { withBase } from "@/utils/paths";
+import mainScript from "../assets/js/main.js?url";
 interface Props {
 	title?: string | undefined;
 	description?: string | undefined;
@@ -45,13 +47,13 @@ import '../styles/article-enhancements.css';
       }
     </script>
 
-    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    <link rel="icon" type="image/x-icon" href={withBase("/favicon.png")} />
   </head>
   <body class="antialiased bg-bg-primary dark:bg-bg-primary-dark max-w-full overflow-x-hidden">
     <TopBg />
     <Header />
     <slot />
     <Footer />
-    <script src="../assets/js/main.js"></script>
+    <script is:inline src={mainScript}></script>
   </body>
 </html>
