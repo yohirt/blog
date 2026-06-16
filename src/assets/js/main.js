@@ -26,10 +26,7 @@ let headerElement = null;
 document.addEventListener("DOMContentLoaded", () => {
 	headerElement = document.getElementById("header");
 
-	if (
-		localStorage.getItem("dark_mode") &&
-		localStorage.getItem("dark_mode") === "true"
-	) {
+	if (localStorage.getItem("dark_mode") !== "false") {
 		window.darkMode = true;
 		showNight();
 	} else {
@@ -93,10 +90,10 @@ document.getElementById("darkToggle")?.addEventListener("click", () => {
 	document.documentElement.classList.add("duration-300");
 
 	if (document.documentElement.classList.contains("dark")) {
-		localStorage.removeItem("dark_mode");
+		localStorage.setItem("dark_mode", "false");
 		showDay(true);
 	} else {
-		localStorage.setItem("dark_mode", true);
+		localStorage.setItem("dark_mode", "true");
 		showNight(true);
 	}
 });

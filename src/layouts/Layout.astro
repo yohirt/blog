@@ -37,10 +37,8 @@ import '../styles/article-enhancements.css';
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
     <script is:inline>
       if (typeof Storage !== 'undefined') {
-        if (
-          localStorage.getItem('dark_mode') &&
-          localStorage.getItem('dark_mode') == 'true'
-        ) {
+        const savedTheme = localStorage.getItem('dark_mode');
+        if (savedTheme !== 'false') {
           document.documentElement.classList.add('dark')
         }
       }
