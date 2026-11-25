@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { withBase } from '@/utils/paths';
+---
+<Layout title="Narzędzia muzyczne" description="Praktyczne aplikacje dla perkusistów: kalkulator strojenia bębnów, kalibracja i symulator pitch bendu.">
+  <main class="site-container mx-auto my-12 px-6 text-neutral-800 dark:text-neutral-200">
+    <p class="text-primary font-medium">WARSZTAT PERKUSISTY</p>
+    <h1 class="font-brand text-5xl my-4">Narzędzia</h1>
+    <p class="text-lg mb-10 max-w-2xl">Od pomysłu na brzmienie do konkretnej częstotliwości. Aplikacje, które pomogą Ci świadomie stroić swój zestaw.</p>
+    <div class="grid md:grid-cols-2 gap-6">
+      <a href={withBase('/narzedzia/strojenie-perkusji/')} class="block rounded-2xl border border-neutral-300 dark:border-neutral-700 p-8 hover:border-primary bg-white dark:bg-neutral-900">
+        <span class="text-primary">01 / STROJENIE</span>
+        <h2 class="font-brand text-3xl my-4">Kalkulator strojenia perkusji</h2>
+        <p>Dobierz nuty i interwały, oblicz częstotliwości przy śrubach, odsłuchaj naciągi i skalibruj ustawienia dla swojego bębna.</p>
+        <p class="mt-6 text-primary font-medium">Otwórz kalkulator</p>
+      </a>
+      <a href={withBase('/narzedzia/strojenie-perkusji/#pitch-bend')} class="block rounded-2xl border border-neutral-300 dark:border-neutral-700 p-8 hover:border-primary bg-white dark:bg-neutral-900">
+        <span class="text-primary">02 / BRZMIENIE</span>
+        <h2 class="font-brand text-3xl my-4">Symulator pitch bendu</h2>
+        <p>Usłysz, jak wysokość dźwięku opada podczas wybrzmiewania. Zmieniaj częstotliwości, krzywą i czas zanikania.</p>
+        <p class="mt-6 text-primary font-medium">Otwórz symulator</p>
+      </a>
+    </div>
+  </main>
+</Layout>

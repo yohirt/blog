@@ -1,0 +1,13 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import App from '@/components/drum-tuning/App.jsx';
+import { withBase } from '@/utils/paths';
+---
+<Layout title="Strojenie perkusji — kalkulator" description="Kalkulator częstotliwości naciągów, kalibracja bębnów i symulator pitch bendu. Zapisuj i odsłuchuj własne strojenia.">
+  <main class="tuning-page">
+    <a class="tools-back" href={withBase('/narzedzia/')}>Narzędzia / Drum Lab</a>
+    <App client:load />
+    <noscript>Włącz JavaScript, aby korzystać z kalkulatora i odsłuchu.</noscript>
+  </main>
+</Layout>
+<style>.tuning-page{max-width:1440px;margin:2rem auto;padding:0 1rem}.tools-back{display:inline-block;margin-bottom:1.5rem;color:var(--color-primary)}</style>

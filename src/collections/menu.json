@@ -8,6 +8,10 @@
 		"url": "/blog"
 	},
 	{
+		"name": "Narzędzia",
+		"url": "/narzedzia"
+	},
+	{
 		"name": "Projekty",
 		"url": "/works"
 	},
